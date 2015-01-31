@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A simple map</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='../dist/mapbox.uncompressed.js'></script>
+<link href='../dist/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+
+.legend label,
+.legend span {
+  display:block;
+  float:left;
+  height:15px;
+  width:20%;
+  text-align:center;
+  font-size:9px;
+  color:#808080;
+  }
+</style>
+</head>
+<body>
+<div id='legend' style='display:none;'>
+  <strong>The Title or Explanation of your Map</strong>
+  <nav class='legend clearfix'>
+    <span style='background:#F1EEF6;'></span>
+    <span style='background:#BDC9E1;'></span>
+    <span style='background:#74A9CF;'></span>
+    <span style='background:#2B8CBE;'></span>
+    <span style='background:#045A8D;'></span>
+    <label>0 - 20%</label>
+    <label>40%</label>
+    <label>60%</label>
+    <label>80%</label>
+    <label>100%</label>
+    <small>Source: <a href="#link to source">Name of source</a></small>
+</div>
+<div id='map'></div>
+
+<script>
+	L.mapbox.accessToken = 'pk.eyJ1IjoiMTMzMDMyMzk5NCIsImEiOiI3SmtiODE4In0.8zXnHasSWb0dyKqOYZlSiw';
+	var map = L.mapbox.map('map', 'http://a.tiles.mapbox.com/v4/mapbox.streets.json?access_token=pk.eyJ1IjoiMTMzMDMyMzk5NCIsImEiOiI3SmtiODE4In0.8zXnHasSWb0dyKqOYZlSiw')
+    // var map = L.mapbox.map('map', 'http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy.json?access_token=pk.eyJ1IjoiY2FtaWxsZWFubmUiLCJhIjoiN0pleXVXTSJ9.olk86fBWmW6kFpmyFfTDqw')
+    .setView([40, -74.50], 9);
+    map.zoomControl.setPosition('bottomleft');
+  map.legendControl.addLegend(document.getElementById('legend').innerHTML)
+</script>
+</body>
+</html>

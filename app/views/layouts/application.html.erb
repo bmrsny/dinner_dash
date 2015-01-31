@@ -2,13 +2,84 @@
 <html>
 <head>
   <title>DinnerDash</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Chango' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
+
+  <meta charset=utf-8 />
+  <title>A simple map</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+
 </head>
 <body>
 
-<%= yield %>
+  <div class="container">
+    <div class="row">
+      <div id="logo" class="col-md-1">
+        <!-- <%#= image_tag "burrito_logo.jpg" %> -->
+      </div>
+      <div id="restaurant_name" class="col-md-6">
+        <h1><%= link_to("Burrito Bombers", root_url )%></h1>
+        <h4>Drone-Delivery to Your Mouth</h4>
+      </div>
+      <div id="user_nav" class="col-md-5 text-right">
+        <div class="row">
+          <% if current_user %>
+            <div class="col-sm-7">
+              <h4>Welcome, <%= current_user.fullname %></h4>
+            </div>
+            <div class="col-sm-3">
+              <%= link_to('Logout', logout_path, :method => :delete, class: "btn btn-default logout") %>
+            </div>
+            <div class="col-sm-2">
+              <%= link_to('My Orders', user_orders_path(current_user), class: "btn btn-default logout") %>
+            </div>
+          <% else %>
+            <%= render partial: "./partials/login" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <div class="row text-right">
+    <div id="cart">
+      <i class="fa fa-shopping-cart fa-2x"></i> <%= link_to "Items in cart: #{@cart.count_total}", cart_path(cart_id = @cart) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="category-nav">
+      <%= render partial: './partials/category_bar' %>
+      </div>
+    </div>
+
+  <div class="row">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+  <% if !current_user.nil? && current_user.admin? %>
+    <footer id="footer" class="footer navbar-fixed-bottom">
+      <div class="row">
+        <div class="col-md-12">
+            <h4>Administrator Controls</h4>
+            <%= link_to('Manage Customer Orders', admin_orders_path, class: "btn btn-lg btn-default orders") %>
+            <%= link_to "Manage Categories", admin_categories_path, class: "btn btn-lg btn-default" %>
+            <%= link_to "Manage Items", admin_items_path, class: "btn btn-lg btn-default" %>
+        </div>
+      </div>
+    </footer>
+  <% end %>
+</div>
+  <!-- <%= debug(params) if Rails.env.development? %> -->
+
+  <%= javascript_include_tag 'application' %>
 
 </body>
 </html>

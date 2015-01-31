@@ -1,0 +1,13 @@
+<div id="item_show" class="row">
+  <div class="col-md-4">
+    <%= image_tag @item.image.url(:medium) %>
+  </div>
+  <div class="col-md-8">
+    <h2><%= @item.title %></h2>
+    <p><%= @item.description %></p>
+    <p><b>price: <%= number_to_currency(@item.price.to_f / 100.00) %></b></p>
+    <% if !@item.retired %>
+      <%= button_to "Add to Cart", cart_index_path(item_id: @item), class: "btn btn-lg btn-default" %>
+    <% end %>
+  </div>
+</div>

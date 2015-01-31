@@ -1,0 +1,49 @@
+<div class="cart">
+
+    <h3>Your Cart</h3>
+
+    <table id="cart_table" class="table">
+      <tr>
+        <th>Qty</th><th>Item</th><th>Description</th><th>Subtotal</th><th></th></tr>
+      <tr>
+
+      </tr>
+      <% @cart.line_items.each do |line_item| %>
+      <tr>
+        <td class="col-sm-2">
+          <%= form_tag(cart_path, method: :put) do %>
+            <%= number_field_tag("qty", line_item[1], class: "qty") %>
+            <%= hidden_field_tag("item_id", line_item[0].id) %>
+            <%= submit_tag "Update Qty", class: "btn btn-default" %>
+          <% end %>
+        </td>
+        <td class="vcenter">
+          <%= line_item[0].title %>
+        </td>
+        <td class="vcenter">
+          <%= line_item[0].description %>
+        </td>
+        <td class="vcenter">
+          <%= number_to_currency(line_item[2]) %>
+        </td>
+        <td class="text-right">
+          <%= button_to "Delete", cart_path(line_item[0]), method: :delete, class: "btn btn-default" %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+    <div id="cart_total" class="text-right">
+      Cart Total: <%= number_to_currency(@cart.total) %>
+
+      <% if current_user == nil %>
+        <div id="checkout" class="not_logged_in text-right">
+          <button type="button" class: "btn btn-lg btn-default">Checkout</button>
+        </div>
+      <% else %>
+        <div id="checkout" class="logged_in text-right">
+          <%= button_to "Checkout", user_orders_path(current_user, @cart), class: "btn btn-lg btn-default" %>
+        </div>
+      <% end %>
+    </div>
+</div>

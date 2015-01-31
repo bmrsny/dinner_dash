@@ -1,0 +1,64 @@
+LOG:  database system was shut down at 2015-01-19 09:57:52 MST
+LOG:  autovacuum launcher started
+LOG:  database system is ready to accept connections
+FATAL:  database "db/test.postgresql" does not exist
+FATAL:  database "db/development.postgresql" does not exist
+FATAL:  database "dinner_dash_test" does not exist
+FATAL:  database "dinner_dash_test" does not exist
+ERROR:  column orders_items.item_id does not exist at character 75
+STATEMENT:  SELECT "items".* FROM "items" INNER JOIN "orders_items" ON "items"."id" = "orders_items"."item_id" WHERE "orders_items"."order_id" = $1
+ERROR:  column orders_items.item_id does not exist at character 75
+STATEMENT:  SELECT "items".* FROM "items" INNER JOIN "orders_items" ON "items"."id" = "orders_items"."item_id" WHERE "orders_items"."order_id" = $1
+ERROR:  column orders_items.item_id does not exist at character 75
+STATEMENT:  SELECT "items".* FROM "items" INNER JOIN "orders_items" ON "items"."id" = "orders_items"."item_id" WHERE "orders_items"."order_id" = $1
+LOG:  database system was shut down at 2015-01-20 21:52:58 MST
+LOG:  autovacuum launcher started
+LOG:  database system is ready to accept connections
+LOG:  database system was shut down at 2015-01-21 12:49:36 MST
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  column "user_id" of relation "orders" does not exist
+STATEMENT:  ALTER TABLE "orders" DROP "user_id"
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2015-01-22 11:46:13 MST
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  database "dinner_dash_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "dinner_dash_development"
+ERROR:  database "dinner_dash_development" already exists
+STATEMENT:  CREATE DATABASE "dinner_dash_development" ENCODING = 'utf8'
+ERROR:  database "dinner_dash_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "dinner_dash_development"
+ERROR:  database "dinner_dash_development" already exists
+STATEMENT:  CREATE DATABASE "dinner_dash_development" ENCODING = 'utf8'
+LOG:  database system was shut down at 2015-01-25 17:41:08 MST
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  unexpected EOF on client connection with an open transaction
+LOG:  unexpected EOF on client connection with an open transaction
+LOG:  unexpected EOF on client connection with an open transaction
+ERROR:  database "dinner_dash_development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "dinner_dash_development"
+ERROR:  database "dinner_dash_development" already exists
+STATEMENT:  CREATE DATABASE "dinner_dash_development" ENCODING = 'utf8'
+ERROR:  database "dinner_dash_development" already exists
+STATEMENT:  CREATE DATABASE "dinner_dash_development" ENCODING = 'utf8'
+ERROR:  database "dinner_dash_development" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "dinner_dash_development"
+LOG:  could not send data to client: Broken pipe
+STATEMENT:  DROP DATABASE IF EXISTS "dinner_dash_development"
+FATAL:  connection to client lost
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2015-01-26 00:00:03 MST
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started

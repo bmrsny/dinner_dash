@@ -1,0 +1,23 @@
+<div id="status">
+  <h4>Order History</h4>
+  <%= @order.created_at.strftime("Submitted at: %b %d, %Y %H:%M")%></br>
+  Status: <%= @order.status %>
+  <% if @order.status == "completed" || @order.status == "cancelled" %>
+    <%= " - #{time_ago_in_words(@order.updated_at)} ago" %>
+  <% end %>
+</div>
+
+<table class="table">
+  <tr>
+    <th>Item</th><th>Quantity</th><th>Price</th>
+  </tr>
+
+  <% @order.orders_items.each do |order_item|%>
+  <tr>
+    <td><%= link_to order_item.item.title, item_path(order_item.item) %></td>
+    <td><%= order_item.quantity %></td>
+    <td><%= number_to_currency(order_item.subtotal.to_f / 100.00) %></td>
+  </tr>
+  <% end %>
+  <tr><td><b>Order Total: </b></td><td/><td><b><%= number_to_currency(@order.total.to_f / 100.00) %></b></td></tr>
+</table>

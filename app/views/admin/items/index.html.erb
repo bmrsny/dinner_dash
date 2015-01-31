@@ -1,0 +1,39 @@
+<div id="orders">
+
+  <h2>Items List</h2>
+
+  <div class="create text-right">
+    <%= link_to "Create New Item", new_admin_item_path, class: "btn btn-lg btn-default create" %>
+  </div>
+
+  <table class="table">
+    <tr><th>Item</th><th></th><th>Description</th><th>Status</th><th>Price</th><th></th></tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <%= link_to item.title, item_path(item) %>
+        </td>
+        <td>
+          <%= image_tag item.image.url(:thumb) %>
+        </td>
+        <td>
+          <%= item.description %>
+        </td>
+        <td>
+          <% if item.retired %>
+            retired
+          <% else %>
+            active
+          <% end %>
+        </td>
+        <td>
+          <%= number_to_currency(item.price.to_f / 100) %>
+        </td>
+        <td>
+          <%= link_to "Edit Item", edit_admin_item_path(item) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

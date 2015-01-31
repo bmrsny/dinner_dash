@@ -1,0 +1,49 @@
+<div id="orders">
+
+<h2>Manage Customer Orders</h2>
+  <% @orders.keys.each do |status| %>
+
+    <h3><%= status %> (<%= @all_orders.status_counts(status).values.join.to_i != 0 ? @all_orders.status_counts(status).values.join : 0 %>)</h3>
+
+    <table class="table">
+    <% @orders[status].each do |order| %>
+    <tr>
+      <td>
+        <%= link_to "Order# #{order.id}: ", admin_order_path(order) %>
+        <%= order.created_at.strftime("Submitted at: %b %d, %Y %H:%M") %>
+      </td>
+
+        <% if status == :ordered %>
+        <td class="text-right">
+          <%= form_tag(admin_order_path(order.id), method: :put) do %>
+            <%= submit_tag("mark as paid", class: "btn btn-default") %>
+          <% end %>
+        </td>
+        <td class="text-right">
+          <%= form_tag(admin_order_path(order.id), method: :put) do %>
+            <%= submit_tag("cancel", class: "btn btn-default") %>
+          <% end %>
+        </td>
+
+        <% elsif status == :paid %>
+        <td class="text-right">
+          <%= form_tag(admin_order_path(order.id), method: :put) do %>
+            <%= submit_tag("mark as completed", class: "btn btn-default") %>
+          <% end %>
+        </td>
+        <td class="text-right">
+          <%= form_tag(admin_order_path(order.id), method: :put) do %>
+            <%= submit_tag("cancel", class: "btn btn-default") %>
+          <% end %>
+        </td>
+
+        <% end %>
+
+      </td>
+    </tr>
+
+    <% end %>
+  </table>
+
+  <% end %>
+</div>

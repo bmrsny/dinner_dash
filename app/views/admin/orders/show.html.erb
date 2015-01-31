@@ -1,0 +1,28 @@
+<div id="status">
+  <h4>Customer Order</h4>
+  <p>Customer Name: <%= @user.fullname %> </p>
+  <p>email: <%= @user.email %> </p>
+  <p><%= @order.created_at.strftime("Submitted at: %b %d, %Y %H:%M")%></p>
+  <p>
+    Status: <%= @order.status %>
+    <% if @order.status == "completed" || @order.status == "cancelled" %>
+    <%= " - #{time_ago_in_words(@order.updated_at)} ago" %>
+    <% end %>
+  </p>
+</div>
+
+<table class="table">
+  <h5>Order Details</h5>
+  <tr>
+    <th>Item</th><th>Quantity</th><th>Price</th>
+  </tr>
+
+  <% @order.orders_items.each do |order_item|%>
+  <tr>
+    <td><%= link_to order_item.item.title, item_path(order_item.item) %></td>
+    <td><%= order_item.quantity %></td>
+    <td><%= number_to_currency(order_item.subtotal.to_f / 100.00) %></td>
+  </tr>
+  <% end %>
+  <tr><td>Order Total: </td><td/><td><%= number_to_currency(@order.total.to_f / 100.00) %></td></tr>
+</table>

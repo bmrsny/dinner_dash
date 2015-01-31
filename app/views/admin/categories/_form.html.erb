@@ -1,0 +1,32 @@
+<div class="form-horizontal">
+  <%= form_for(@category) do |f| %>
+    <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name, "Category Name", class: "col-sm-2 control-label" %>
+      <div class="col-sm-7">
+        <%= f.text_field :name, placeholder: "New Category Name", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, "Category Description", class: "col-sm-2 control-label" %>
+      <div class="col-sm-7">
+        <%= f.text_area :description, placeholder: "New Category Description", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="action col-sm-9 text-right">
+      <%= f.submit "Save", class: "btn btn-lg btn-default" %>
+    </div>
+  <% end %>
+</div>

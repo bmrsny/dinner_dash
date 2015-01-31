@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+  $(".not_logged_in").click(function(){
+    alert("You must be logged in to check out!")
+  });
+
+  // $("#footer").exists(function() {
+  //   $(".container").css({padding-bottom: "150px"})
+  // });
+  //
+});
