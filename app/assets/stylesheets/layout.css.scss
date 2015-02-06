@@ -8,6 +8,17 @@ body {
   background-size: 200px;
 }
 
+.alert-danger {
+  background-image: linear-gradient(to bottom,#f2dede 0,#e7c3c3 100%);
+  background-repeat: repeat-x;
+  border-color: #dca7a7;
+  margin-bottom: 20px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25),0 1px 2px rgba(0,0,0,.05);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  padding-left: 15px;
+}
+
 .container {
   padding-bottom: 150px;
 }

@@ -6,7 +6,10 @@ module Admin
 
     private
     def verify_admin
-      redirect_to root_url unless current_user && current_user.role == "admin"
+      unless current_user && current_user.role == "admin"
+        flash[:errors] = "Not authorized"
+        redirect_to root_url
+      end
     end
 
     def item_params
